@@ -1,0 +1,160 @@
+
+- platform: template
+  sensors:      
+    #ender 3 stuff
+    ender3_curr_bed_temp_c:
+      friendly_name: Current Temp
+      icon_template: mdi:thermometer
+      unit_of_measurement: '°C '
+      value_template: "{{(((states.sensor.ender_3_actual_bed_temp.state | float - 32) * 5 / 9) | round(1)) }}"
+    ender3_targ_bed_temp_c:
+      friendly_name: Target Temp
+      icon_template: mdi:thermometer
+      unit_of_measurement: '°C '
+      value_template: "{{(((states.sensor.ender_3_target_bed_temp.state | float - 32) * 5 / 9) | round(1)) }}"
+    ender3_curr_bed_temp_label_c:
+      friendly_name: Bed Current Temp
+      icon_template: mdi:thermometer
+      unit_of_measurement: '°C '
+      value_template: "{{states.sensor.ender3_curr_bed_temp_c.state}}"
+    ender3_targ_bed_temp_label_c:
+      friendly_name: Bed Target Temp
+      icon_template: mdi:thermometer
+      unit_of_measurement: '°C '
+      value_template: "{{states.sensor.ender3_targ_bed_temp_c.state}}"
+    ender3_curr_bed_temp_f:
+      friendly_name: Current Temp
+      icon_template: mdi:thermometer
+      unit_of_measurement: '°F '
+      value_template: "{{states.sensor.ender_3_actual_bed_temp.state}}"
+    ender3_targ_bed_temp_f:
+      friendly_name: Target Temp
+      icon_template: mdi:thermometer
+      unit_of_measurement: '°F '
+      value_template: "{{states.sensor.ender_3_target_bed_temp.state}}"
+    ender3_curr_hotend_temp_c:
+      friendly_name: Current Temp
+      icon_template: mdi:thermometer
+      unit_of_measurement: '°C '
+      value_template: "{{(((states.sensor.ender_3_actual_tool0_temp.state | float - 32) * 5 / 9) | round(1)) }}"
+    ender3_targ_hotend_temp_c:
+      friendly_name: Target Temp
+      icon_template: mdi:thermometer
+      unit_of_measurement: '°C '
+      value_template: "{{(((states.sensor.ender_3_target_tool0_temp.state | float - 32) * 5 / 9) | round(1)) }}"
+    ender3_curr_hotend_temp_label_c:
+      friendly_name: Hotend Current Temp
+      icon_template: mdi:thermometer
+      unit_of_measurement: '°C '
+      value_template: "{{states.sensor.ender3_curr_hotend_temp_c.state}}"
+    ender3_targ_hotend_temp_label_c:
+      friendly_name: Hotend Target Temp
+      icon_template: mdi:thermometer
+      unit_of_measurement: '°C '
+      value_template: "{{states.sensor.ender3_targ_hotend_temp_c.state}}"
+    ender3_curr_hotend_temp_f:
+      friendly_name: Current Temp
+      icon_template: mdi:thermometer
+      unit_of_measurement: '°F '
+      value_template: "{{states.sensor.ender_3_actual_tool0_temp.state}}"
+    ender3_targ_hotend_temp_f:
+      friendly_name: Target Temp
+      icon_template: mdi:thermometer
+      unit_of_measurement: '°F '
+      value_template: "{{states.sensor.ender_3_target_tool0_temp.state}}"
+    ender3_days_remaining:
+      friendly_name: Days
+      icon_template: mdi:clock-end
+      unit_of_measurement: 'Days'
+      value_template: >-
+        {% if states.sensor.ender_3_time_remaining.state == 'unknown' %}
+          unknown
+        {% else %}
+          {{ ((states.sensor.ender_3_time_remaining.state | float) / 86400) | round(2) }}
+        {% endif %}
+    ender3_hours_remaining:
+      friendly_name: Hours
+      icon_template: mdi:clock-end
+      unit_of_measurement: 'Hours'
+      value_template: >-
+        {% if states.sensor.ender_3_time_remaining.state == 'unknown' %}
+          unknown
+        {% else %}
+          {{ ((states.sensor.ender_3_time_remaining.state | float) / 3600) | round(2) }}
+        {% endif %}
+    ender3_minutes_remaining:
+      friendly_name: Minutes
+      icon_template: mdi:clock-end
+      unit_of_measurement: 'Minutes'
+      value_template: >-
+        {% if states.sensor.ender_3_time_remaining.state == 'unknown' %}
+          unknown
+        {% else %}
+          {{ ((states.sensor.ender_3_time_remaining.state | float) / 60) | round(2) }}
+        {% endif %}
+    ender3_seconds_remaining:
+      friendly_name: Seconds
+      icon_template: mdi:clock-end
+      unit_of_measurement: 'Seconds'
+      value_template: "{{ states.sensor.ender_3_time_remaining.state }}"
+    ender3_time_remaining:
+      friendly_name: Time
+      icon_template: mdi:clock-end
+      value_template: >-
+        {% if states.sensor.ender_3_time_remaining.state == 'unknown' %}
+          unknown
+        {% else %}
+          {{ states.sensor.ender3_days_remaining.state | int }}:{{ (states.sensor.ender3_hours_remaining.state | int % 24) | int}}:{{ (states.sensor.ender3_minutes_remaining.state | int % 60) | int }}:{{ states.sensor.ender3_seconds_remaining.state | int % 60 }}
+        {% endif %}
+    ender3_time_remaining_labeled:
+      friendly_name: Time Remaining
+      icon_template: mdi:clock-end
+      value_template: "{{ states.sensor.ender3_time_remaining.state }}"
+    ender3_days_elapsed:
+      friendly_name: Days
+      icon_template: mdi:clock-start
+      unit_of_measurement: 'Days'
+      value_template: >-
+        {% if states.sensor.ender_3_time_elapsed.state == 'unknown' %}
+          unknown
+        {% else %}
+          {{ ((states.sensor.ender_3_time_elapsed.state | float) / 86400) | round(2) }}
+        {% endif %}
+    ender3_hours_elapsed:
+      friendly_name: Hours
+      icon_template: mdi:clock-start
+      unit_of_measurement: 'Hours'
+      value_template: >-
+        {% if states.sensor.ender_3_time_elapsed.state == 'unknown' %}
+          unknown
+        {% else %}
+          {{ ((states.sensor.ender_3_time_elapsed.state | float) / 3600) | round(2) }}
+        {% endif %}
+    ender3_minutes_elapsed:
+      friendly_name: Minutes
+      icon_template: mdi:clock-start
+      unit_of_measurement: 'Minutes'
+      value_template: >-
+        {% if states.sensor.ender_3_time_elapsed.state == 'unknown' %}
+          unknown
+        {% else %}
+          {{ ((states.sensor.ender_3_time_elapsed.state | float) / 60) | round(2) }}
+        {% endif %}
+    ender3_seconds_elapsed:
+      friendly_name: Seconds
+      icon_template: mdi:clock-start
+      unit_of_measurement: 'Seconds'
+      value_template: "{{ states.sensor.ender_3_time_elapsed.state }}"
+    ender3_time_elapsed:
+      friendly_name: Time
+      icon_template: mdi:clock-start
+      value_template: >-
+        {% if states.sensor.ender_3_time_elapsed.state == 'unknown' %}
+          unknown
+        {% else %}
+          {{ states.sensor.ender3_days_elapsed.state | int }}:{{ (states.sensor.ender3_hours_elapsed.state | int % 24) | int}}:{{ (states.sensor.ender3_minutes_elapsed.state | int % 60) | int }}:{{ states.sensor.ender3_seconds_elapsed.state | int % 60 }}
+        {% endif %}
+    ender3_time_elapsed_labeled:
+      friendly_name: Time Elapsed
+      icon_template: mdi:clock-end
+      value_template: "{{ states.sensor.ender3_time_elapsed.state }}"

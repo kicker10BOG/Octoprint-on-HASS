@@ -1,0 +1,16 @@
+
+
+octoprint:
+  host: ###.###.###.###
+  api_key: SECRET - Found in Octoprint settings
+  name: Ender-3
+  bed: true # signifies heated bed
+  number_of_tools: 1 # the number of extruders
+  
+  
+  
+camera:
+  - platform: mjpeg
+    name: Ender 3
+    still_image_url: http://###.###.###.###/webcam/?action=snapshot
+    mjpeg_url: http://###.###.###.###/webcam/?action=stream

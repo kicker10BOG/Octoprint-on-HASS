@@ -1,0 +1,98 @@
+
+# Jason's Ender-3 - used in the tab for my room
+ender3_jason:
+  name: Ender 3
+  entities: 
+    - switch.ender_3
+    - light.extended_color_light_1
+    - binary_sensor.ender_3_printing
+    - binary_sensor.ender_3_printing_error
+    - sensor.ender_3_current_state
+    - sensor.ender_3_job_percentage
+    - sensor.ender3_time_elapsed_labeled
+    - sensor.ender3_time_remaining_labeled
+    - sensor.ender3_curr_bed_temp_label_c
+    - sensor.ender3_targ_bed_temp_label_c
+    - sensor.ender3_curr_hotend_temp_label_c
+    - sensor.ender3_targ_hotend_temp_label_c
+    - camera.ender_3
+
+    
+ender3_bed_temps_c:
+  name: Bed
+  control: hidden
+  entities:
+    - sensor.ender3_curr_bed_temp_c
+    - sensor.ender3_targ_bed_temp_c
+    
+ender3_bed_temps_f:
+  name: Bed
+  control: hidden
+  entities:
+    - sensor.ender_3_actual_bed_temp
+    - sensor.ender_3_actual_bed_temp
+    
+ender3_hotend_temps_c:
+  name: Hotend
+  control: hidden
+  entities:
+    - sensor.ender3_curr_hotend_temp_c
+    - sensor.ender3_targ_hotend_temp_c
+    
+ender3_hotend_temps_f:
+  name: Hotend
+  control: hidden
+  entities:
+    - sensor.ender_3_actual_tool0_temp
+    - sensor.ender_3_actual_tool0_temp
+    
+ender3_time_remaining:
+  name: Remaining
+  control: hidden
+  entities: 
+    - sensor.ender3_days_remaining
+    - sensor.ender3_hours_remaining
+    - sensor.ender3_minutes_remaining
+    - sensor.ender3_seconds_remaining
+    - sensor.ender3_time_remaining
+    
+ender3_time_elapsed:
+  name: Elapsed
+  control: hidden
+  entities: 
+    - sensor.ender3_days_elapsed
+    - sensor.ender3_hours_elapsed
+    - sensor.ender3_minutes_elapsed
+    - sensor.ender3_seconds_elapsed
+    - sensor.ender3_time_elapsed
+    
+ender3_switches:
+  name: Power
+  entities: 
+    - switch.ender_3
+    - light.extended_color_light_1
+    
+ender3_status:
+  name: Status
+  control: hidden
+  entities:
+    - binary_sensor.ender_3_printing
+    - binary_sensor.ender_3_printing_error
+    - sensor.ender_3_current_state
+    - sensor.ender_3_job_percentage
+    
+ender3:
+  name: Ender 3
+  icon: mdi:printer-3d
+  view: yes
+  control: hidden
+  entities:
+    - group.ender3_status
+    - group.ender3_switches
+    - group.ender3_bed_temps_c
+    # - group.ender3_bed_temps_f
+    - group.ender3_hotend_temps_c
+    # - group.ender3_hotend_temps_f
+    - group.ender3_time_remaining
+    - group.ender3_time_elapsed
+    - camera.ender_3
